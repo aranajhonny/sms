@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<h1> Endpoints: </h1>
+
+<p>Obtener lista de mensages enviados solicitud [GET]</p> 
+	
+<code>URL = http://noustech.dyndns.org/sms/index.php/api/list?token={TOKEN_USUARIO}</code>
+<p>
+	Parametros: 
+	
+		token
+	Retorna: 
+		token_sms
+		recibido 
+		fecha_hora_envio
+		fecha_hora_enviado 
+		status 
+		destinatario
+
+	codigos de respuesta:
+		
+		200 OK
+		401 No autorizado
+		500 Error del servidor
+		
+	Ejemplo de solicitud:
+</p>
+<pre>
+	curl -X GET http://noustech.dyndns.org/sms/index.php/api/list?token=bec435931b0cfbc4260d6cd5609a8a
+</pre>
+		
+
+
+
+Crear nuevo sms solicitud [POST]
+
+	URL = http://noustech.dyndns.org/sms/index.php/api/create
+	
+	Parametros: 
+		token
+		telefonos
+		fecha_hora
+		texto
+
+	Retorna:	
+		status
+		token_sms
+		fecha_hora_envio
+		destinatario
+
+	codigos de respuesta:
+
+	200 OK
+	401 No autorizado
+	500 Error del servidor
+	
+	Ejemplo de solicitud para un solo mensaje:
+	
+	curl -X POST http://127.0.0.1/sms/index.php/api/create \
+		-d token="bec435931b0cfbc4260d6cd5609a8a" \
+		-d texto="Este es un mensaje de prueba" \
+		-d telefonos="4123338810"
+
+	Ejemplo de solicitud para varios mensajes:
+		
+	curl -X POST http://127.0.0.1/sms/index.php/api/create \
+		-d token="bec435931b0cfbc4260d6cd5609a8a" \
+		-d texto="Este es un mensaje de prueba" \
+		-d telefonos[]="4123338810"
+		-d telefonos[]="4123338810"
+
+Obtener status de un SMS determinado	
+	
+	URL = http://127.0.0.1/sms/index.php/api/status/{TOKEN_SMS}/?token={TOKEN_USUARIO}
+	
+	Parametros: 
+		token de usuario y token de sms
+	Retorna:	
+    		token
+    		recibido
+    		fecha_hora_envio
+    		fecha_hora_enviado
+    		status
+    		destinatario
+
+	codigos de respuesta:
+
+	200 OK
+	401 No autorizado
+	500 Error del servidor
+	
+	Ejemplo de solicitud para obtener status de mensaje:
+	
+	curl -X GET 'http://127.0.0.1/sms/index.php/api/status/0dab318eac75d04825ee294ae23f1f/?token=bec435931b0cfbc4260d6cd5609a8a'
+
+	
+
+</body>
+</html>
